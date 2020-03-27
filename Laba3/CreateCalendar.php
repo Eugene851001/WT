@@ -14,6 +14,7 @@
 			echo '</br>';
 			$calendar = getCalendar($year);
 			$calendarTable = showCalendar($calendar, $course, $year);
+			echo $year . '/' . ($year + 1);
 			echo $calendarTable;
 			writeFile("calendar.html", $calendarTable);
 		}
@@ -115,14 +116,28 @@ function showCalendar($calendar, $course, $year) {
 }
 
 
+function GetDayAmount($year)
+{
+	$result = 365;
+	if ($year % 4 == 0){
+		if ($year % 100 == 0){
+			if(($year / 100) % 4 == 0){
+				$result--;
+			}
+		}
+		$result++;
+	}
+	return $result;
+}
+
 //считает с попракой на то, что месяцы 1-8 находятся в следующем году
 function getSerialDayNumber($day, $month, $year) {
 	$counter = 0;
 	for ($i = 1; $i < $month; $i++) {
 		$counter += cal_days_in_month(CAL_GREGORIAN, $i, $year);
 	}
-	if ($month >= 1 && $month <= 9) {
-		$counter += 365;
+	if ($month >= 1 && $month <= 8) {
+		$counter += GetDayAmount($year);
 	}
 	$counter += $day;
 	return $counter;
