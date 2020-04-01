@@ -4,26 +4,16 @@ define('MIN_YEAR', 1);
 define('MAX_YEAR', 2049);
 define('MIN_COURSE', 1);
 define('MAX_COURSE', 3);
-    
-if (isset($_POST['year'])&& isset($_POST['course'])) {
-    $year = $_POST['year'];
-    $course = $_POST['course'];
-    if (is_numeric($year) && $year >= MIN_YEAR && $year <= MAX_YEAR
+
+function isCorrectInput($year, $course) {
+	$isCorrect = false;
+	if (is_numeric($year) && $year >= MIN_YEAR && $year <= MAX_YEAR
         && is_numeric($course) && $course >= MIN_COURSE && $course <= MAX_COURSE) {
-            unset($_POST['incorrect']);
-            echo '</br>';
-            $calendar = getCalendar($year);
-            $calendarTable = showCalendar($calendar, $course, $year);
-            echo $calendarTable;
-            file_put_contents("calendar.html", $calendarTable);
-        }
-        else {
-            $_POST['incorrect'] = true;
-            include "Main.php";
-            echo "Please, check the input";
-        }
-}
-    
+		$isCorrect = true;
+	}
+	return $isCorrect;
+}    
+	
 function getCalendar($year){
     $calendar;
     for($month = 1; $month < 13; $month++) {
