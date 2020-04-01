@@ -24,8 +24,6 @@ if (isset($_POST['year'])&& isset($_POST['course'])) {
         }
 }
     
-
-
 function getCalendar($year){
     $calendar;
     for($month = 1; $month < 13; $month++) {
@@ -141,20 +139,18 @@ function isSession($course, $month, $day, $year) {
 }    
 
 function isInInterval($schedule, $day, $month, $year) {
-        $isChecked = false;
-        $amount = count($schedule);
-        for ($i = 1; $i <= $amount && !$isChecked; $i++) { 
-            $currentSchedule = $schedule[$i];
-            if (getSerialDayNumber($currentSchedule['start']['day'], $currentSchedule['start']['month'], $year) <=
-                getSerialDayNumber($day, $month, $year) && getSerialDayNumber($day, $month, $year) 
-                <= getSerialDayNumber($currentSchedule['finish']['day'], $currentSchedule['finish']['month'], $year)) {
-                    $isChecked = true;
-            }
-            else {
-                $isChecked =  false;
-            }
+    $isChecked = false;
+    $amount = count($schedule);
+    for ($i = 1; $i <= $amount && !$isChecked; $i++) { 
+        $currentSchedule = $schedule[$i];
+         if (getSerialDayNumber($currentSchedule['start']['day'], $currentSchedule['start']['month'], $year) <=
+            getSerialDayNumber($day, $month, $year) && getSerialDayNumber($day, $month, $year) 
+            <= getSerialDayNumber($currentSchedule['finish']['day'], $currentSchedule['finish']['month'], $year)) {
+                $isChecked = true;
         }
-        return $isChecked;
+        else {
+            $isChecked =  false;
+        }
+    }
+    return $isChecked;
 }
-
-    
