@@ -8,6 +8,10 @@
 	background: url(Background.png);
 }
 
+.answers {
+	text-align: left; 
+}
+
 header{
 	display: block;
 	background-color: #8892BF;
@@ -37,7 +41,7 @@ footer{
 }
 article{
 	background-color: #F2F2F2;
-	
+	text-align: center;
 }
 
 nav {

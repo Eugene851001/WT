@@ -1,0 +1,55 @@
+<p>
+				PHP поддерживает десять простых типов.</br>
+
+				Четыре скалярных типа:
+				</p>
+					<div class = "lists">
+					<ul>
+						<li>Boolean</li>
+						<li>Integer</li>
+						<li>float</li>
+						<li>string</li>
+					</ul>
+					</div>
+				<p>Четыре смешанных типа:</br>
+				</p>
+				<p>
+					<div class = "lists">
+						<ul>
+							<li>Array</li>
+							<li>Object</li>
+							<li>Callable</li>
+							<li>iterable</li>
+						</ul>
+					</div>
+				</p>
+				<p>И, наконец, два специальных типа:</p>
+					<div class = "lists">
+						<ul>
+							<li>resource</li>
+							<li>NULL</li>
+						</ul>
+					</div>
+				<a name = "FirstExample"><h5>Пример #1 использование типов</h5></a>
+				<div class= "example">
+					&lt;?php</br>
+					$a_bool = TRUE;   // логический</br>
+					$a_str  = "foo";  // строковый</br>
+					$a_str2 = 'foo';  // строковый</br>
+					$an_int = 12;     // целочисленный</br>
+					</br>
+					echo gettype($a_bool); // выводит: boolean</br>
+					echo gettype($a_str);  // выводит: string</br>
+					</br>
+					// Если это целое, увеличить на четыре</br>
+					if (is_int($an_int)) {</br>
+						$an_int += 4;</br>
+					}</br>
+					</br>
+					// Если $a_bool - это строка, вывести ее</br>
+					// (ничего не выводит)</br>
+					if (is_string($a_bool)) {</br>
+						echo "Строка: $a_bool";</br>
+					}</br>
+					?&gt;
+				</div>
