@@ -13,9 +13,16 @@ if(isset($_FILES['userfiles'])) {
 	foreach ($_FILES['userfiles']['error'] as $key => $value) {
 		if($_FILES['userfiles']['error'][$key] === UPLOAD_ERR_OK) {
             $fileName = $_FILES['userfiles']['name'][$key];
-            $fileContent = file_get_contents($fileName);
-            echo preg_replace($patterns, $replacements, $fileContent);
-        }
+            if (!$fileContent = file_get_contents($fileName)) {
+				echo 'File is not found';
+			}
+			else{
+				echo preg_replace($patterns, $replacements, $fileContent);
+			}
+		}
+		else ($_FILES['userfiles']['error'][$key] == ERR_FILE_NOT_FOUND) {
+			echo 'Not found';
+		}
         else{
             echo 'Error during loading';
         }
