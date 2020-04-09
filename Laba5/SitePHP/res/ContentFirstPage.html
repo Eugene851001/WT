@@ -1,0 +1,41 @@
+<div class = "info">
+					<h3 class = "title"> Первая страница на php</h3>
+				</div>
+				<p>Создайте файл с именем hello.php в корневом каталоге 
+					веб-сервера (DOCUMENT_ROOT) и запишите в него следующее:</p>
+				<a name = "FirstExample"><h5>Пример #1 Первый скрипт на PHP: hello.php</h5></a>
+				<div class = "example">
+					&lt;html&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;PHP Test&lt;/title&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;?php echo 
+						'&lt;p&gt;Привет, мир!/p&gt;'; ?&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;</br>
+					&lt;/html&gt;</br>
+				</div>
+				<p>
+				Откройте данный файл в браузере, набрав имя вашего веб-сервера и /hello.php. При локальной разработке эта ссылка может быть чем-то вроде http://localhost/hello.php или http://127.0.0.1/hello.php, но это зависит от настроек вашего сервера. Если все настроено правильно, этот файл будет обработан PHP и браузер выведет следующий текст:
+				</p>
+				<div class = "example">
+					&lt;html&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;PHP Test&lt;/title&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Hello World&lt;/p&gt;</br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;</br>
+					&lt;/html&gt;</br>
+				</div>
+				<p>
+					Эта программа чрезвычайно проста, и для создания настолько простой странички даже необязательно использовать PHP. Все, что она делает, это вывод Hello World, используя инструкцию PHP echo. Заметьте, что файл не обязан быть выполняемым или еще как-то отличаться от других файлов. Сервер знает, что этот файл должен быть обработан PHP, так как файл обладает расширением ".php", о котором в настройках сервера сказано, что подобные файлы должны передаваться PHP. Рассматривайте его как обычный HTML-файл, которому посчастливилось заполучить набор специальных тегов (доступных также и вам),
+					способных на кучу интересных вещей
+				</p>
+				<p>Теперь, когда вы успешно создали работающий PHP-скрипт, самое время создать самый знаменитый PHP-скрипт! Вызовите функцию phpinfo() и вы увидите множество полезной информации о вашей системе и настройке, такой как доступные предопределенные переменные, загруженные PHP-модули и параметры настройки. Уделите некоторое время изучению
+						этой важной информации.
+				</p>
+				<a name = "SecondExample"><h5>Пример #2 Получение информации о системе из PHP</h5></a>
+				<div class="example">
+					&lt;?php phpinfo(); ?&gt;
+				</div>
