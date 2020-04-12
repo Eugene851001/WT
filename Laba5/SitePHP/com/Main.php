@@ -12,10 +12,8 @@ $content = 'Content not found';
 $content_file_name = $row['page_content'];
 $content .= $SERVER['DOCUMENT_ROOT'] . $content_file_name;
 if(file_exists($SERVER['DOCUMENT_ROOT'] . $content_file_name)) {
-	$content = file_get_contents($content_file_name);
+    $content = file_get_contents($content_file_name);
 }
-//echo $title;
 $header = $row['header'];
-//echo $header;
 
 include('../Template.php');
