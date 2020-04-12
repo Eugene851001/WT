@@ -1,45 +1,53 @@
 <?php
 
-$patterns = array();
-$patterns['file'] = '/({FILE=")(.*)("})/';
-$patterns['variable'] = '/({VAR=")(.*)("})/';
-$patterns['config'] = '/({CONFIG=")(.*)("})/';
-$patterns['database'] = '/({DB=")(.*)("})/';
-$configFileName = 'config.ini';
-$configFileContent = parse_ini_file($configFileName);
+$patternsHandlers = array();
+$patternsHandlers['/({FILE=")(.*)("})/'] = 'insertFile';
+$patternsHandlers['/({VAR=")(.*)("})/'] = 'insertVariable';
+$patternsHandlers['/({CONFIG=")(.*)("})/'] = 'insertConfig';
+$patternsHandlers['/({DB=")(.*)("})/'] = 'insertDatabase';
 
 if(isset($_FILES['userfiles'])) {
     foreach ($_FILES['userfiles']['error'] as $key => $value) {
         if($_FILES['userfiles']['error'][$key] === UPLOAD_ERR_OK) {
             $fileName = $_FILES['userfiles']['name'][$key];
             $content = $content = file_get_contents($fileName); 
-            foreach($patterns as $key => $value) {
-                $matches = array();
-                preg_match($value, $content, $matches);
-                if (($key === 'file') && (isset($matches[2])))
-                {
-                    $replacement = $matches[2];
-                    $replacement = file_get_contents($replacement);
-                    $content = preg_replace($value, $replacement, $content);
-                } elseif (($key === 'variable') && isset($matches[2])) {
-                    $replacement = $matches[2];
-                    if(isset($GLOBALS[$replacement])) {
-                        $content = preg_replace($value, $GLOBALS[$replacement], $content);
-                    }
-                } elseif($key === 'config' && isset($matches[2])){
-                    $replacement = $matches[2];
-                    if (isset($configFileContent[$replacement])) {
-                        $content = preg_replace($value, $configFileContent[$replacement], $content);
-                    }
-                } elseif($key === 'database' && isset($matches[2])){
-                    $replacement = getFromDatabase($matches[2]);
-                    if($replacement) {
-                        $content = preg_replace($value, $replacement, $content);
-                    }
-                }
+            foreach($patternsHandlers as $key => $value) {
+                preg_match($key, $content, $matches);
+                $value($key, $matches, $content);
             }
             echo $content;
         }
+    }
+}
+
+function insertDatabase($pattern, $matches, &$content) {
+    if(isset($matches[2])) {
+        $replacement = getFromDatabase($matches[2]);
+        $content = preg_replace($pattern, $replacement, $content);
+    }
+}
+
+function insertConfig($pattern, $matches, &$content) {
+    $configFileName = 'config.ini';
+    $configFileContent = parse_ini_file($configFileName);
+    if (isset($matches[2]) && isset($configFileContent[$matches[2]])) {
+        $replacement = $matches[2];
+        $content = preg_replace($pattern, $configFileContent[$replacement], $content);
+    }
+}
+
+function insertVariable($pattern, $matches, &$content) {
+    if(isset($matches[2]) && isset($GLOBALS[$matches[2]])) {
+        $replacement = $matches[2];
+        $content = preg_replace($pattern, $GLOBALS[$replacement], $content);    
+    }
+}
+
+function insertFile($pattern, $matches, &$content) {
+    if(isset($matches[2])) {
+        $replacement = $matches[2];
+        $replacement = file_get_contents($replacement);
+        $content = preg_replace($pattern, $replacement, $content);
     }
 }
     
