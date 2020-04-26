@@ -10,8 +10,8 @@ $replacements[] = '<em style="color:green">${2}</em>';
 $replacements[] = '<b style="color:red">${2}</b>';
 
 if(isset($_FILES['userfiles'])) {
-	foreach ($_FILES['userfiles']['error'] as $key => $value) {
-		if($_FILES['userfiles']['error'][$key] === UPLOAD_ERR_OK) {
+    foreach ($_FILES['userfiles']['error'] as $key => $value) {
+    if($_FILES['userfiles']['error'][$key] === UPLOAD_ERR_OK) {
             $fileName = $_FILES['userfiles']['name'][$key];
             $fileContent = file_get_contents($fileName);
             echo preg_replace($patterns, $replacements, $fileContent);
@@ -19,7 +19,5 @@ if(isset($_FILES['userfiles'])) {
         else{
             echo 'Error during loading';
         }
-    }	
+    }
 }
-
-	
