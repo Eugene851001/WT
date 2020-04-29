@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Апр 26 2020 г., 13:58
+-- Время создания: Апр 09 2020 г., 15:02
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.4.2
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `site_php`
 --
+CREATE DATABASE IF NOT EXISTS `site_php` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `site_php`;
 
 -- --------------------------------------------------------
 
@@ -47,8 +49,26 @@ INSERT INTO `pages` (`page_id`, `page_title`, `header`, `page_content`) VALUES
 (6, 'Something usefull', 'Документация PHP', '../res/ContentSomethingUsefull.html'),
 (7, 'Types', 'Документация PHP', '../res/ContentTypes.html'),
 (8, 'Compiler', 'Компилятор', '../res/ContentCompiler.html'),
-(9, 'Registration', 'Документация PHP', '../res/ContentRegistration.html'),
-(10, 'Login in', 'Документация PHP', '../res/ContentLogin.html');
+(9, 'Registration', 'Документация PHP', '../res/ContentRegistration.html');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `programs`
+--
+
+CREATE TABLE `programs` (
+  `program_id` int NOT NULL,
+  `program_name` varchar(20) DEFAULT NULL,
+  `owner_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `programs`
+--
+
+INSERT INTO `programs` (`program_id`, `program_name`, `owner_id`) VALUES
+(2, '????5', 3);
 
 -- --------------------------------------------------------
 
@@ -109,22 +129,15 @@ INSERT INTO `surveys` (`survey_id`, `name`, `LINK`) VALUES
 
 CREATE TABLE `users` (
   `user_id` int NOT NULL,
-  `user_name` varchar(20) DEFAULT NULL,
-  `login` varchar(30) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `mail` varchar(30) DEFAULT NULL
+  `user_name` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `login`, `password`, `mail`) VALUES
-(1, 'name', '234', '$2y$10$/gqI.WtABZp05F9EIsU5oepLKgH/QFk8X8Ukb.kE3PK7SkKkTJYbe', '324'),
-(2, 'name', 'Admin', '$2y$10$k4VlKqlj4KEW6fs6uOrJguXh8QjVHTLFOFJlgTeO9MwoWt5ZIzlem', 'jackz16302mail.ru'),
-(3, 'Jack', '12345', '$2y$10$L173Eej9G1P3CEL9JTBaJOeAaWfSAc2MRY4xINH9YB6v5k3fBpjOa', '123'),
-(4, 'name', 'login', '$2y$10$WlgSUx.DfOl9rtFj8mw9OOyI1qhKuyf4jpMq63mfGN.V4DnWvZaqe', 'jackz16302mail.ru'),
-(5, 'name', 'logout', '$2y$10$HxsQaoybq993kzmA1F4vpONmhguqsVrhFQtU8Zw2GAj0W5Onk8pA6', 'jackz16302mail.ru');
+INSERT INTO `users` (`user_id`, `user_name`) VALUES
+(3, 'BILL');
 
 --
 -- Индексы сохранённых таблиц
@@ -135,6 +148,13 @@ INSERT INTO `users` (`user_id`, `user_name`, `login`, `password`, `mail`) VALUES
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`page_id`);
+
+--
+-- Индексы таблицы `programs`
+--
+ALTER TABLE `programs`
+  ADD PRIMARY KEY (`program_id`),
+  ADD KEY `owner_id` (`owner_id`);
 
 --
 -- Индексы таблицы `sections`
@@ -162,7 +182,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `page_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `page_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT для таблицы `programs`
+--
+ALTER TABLE `programs`
+  MODIFY `program_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `sections`
@@ -180,7 +206,17 @@ ALTER TABLE `surveys`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `programs`
+--
+ALTER TABLE `programs`
+  ADD CONSTRAINT `programs_ibfk_1` FOREIGN KEY (`owner_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

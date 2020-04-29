@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 	<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'Main.php' ? 'active' : '';?>> 
-		<a href="Main.php">
+		<a href="Main.php"><?php echo $_SERVER['SCRIPT_NAME'];?>
 			Главная
 		</a>
 	</p>
@@ -22,11 +22,6 @@
 	<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'Registration.php' ? 'active' : '';?>>
 		<a href = "Registration.php">
 			Регистрация
-		</a>
-	</p>
-	<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'Login.php' ? 'active' : '';?>>
-		<a href = "Login.php">
-			Вход
 		</a>
 	</p>
 	<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'SiteMap.php' ? 'active' : '';?>>
