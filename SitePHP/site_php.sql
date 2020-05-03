@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Апр 26 2020 г., 13:58
+-- Время создания: Май 03 2020 г., 12:28
 -- Версия сервера: 8.0.19
 -- Версия PHP: 7.4.2
 
@@ -48,7 +48,9 @@ INSERT INTO `pages` (`page_id`, `page_title`, `header`, `page_content`) VALUES
 (7, 'Types', 'Документация PHP', '../res/ContentTypes.html'),
 (8, 'Compiler', 'Компилятор', '../res/ContentCompiler.html'),
 (9, 'Registration', 'Документация PHP', '../res/ContentRegistration.html'),
-(10, 'Login in', 'Документация PHP', '../res/ContentLogin.html');
+(10, 'Login in', 'Документация PHP', '../res/ContentLogin.html'),
+(11, 'Feedback', 'Документация PHP', '../res/ContentFeedback.html'),
+(12, 'Statistics', 'Статистика', '');
 
 -- --------------------------------------------------------
 
@@ -79,6 +81,27 @@ INSERT INTO `sections` (`section_id`, `parent_section_id`, `title`, `link`) VALU
 (9, 6, 'Output', 'SomethingUsefull.php#FirstExample'),
 (10, 6, 'If contructions', 'SomethingUsefull.php#SecondExample'),
 (11, 0, 'Site Map', 'SiteMap.php');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `statistics`
+--
+
+CREATE TABLE `statistics` (
+  `id` int NOT NULL,
+  `browser_name` varchar(30) DEFAULT NULL,
+  `user_address` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `statistics`
+--
+
+INSERT INTO `statistics` (`id`, `browser_name`, `user_address`) VALUES
+(1, 'Opera', '::1'),
+(2, 'Edge', '192.168.230.1'),
+(3, 'Opera', '192.168.230.1');
 
 -- --------------------------------------------------------
 
@@ -143,6 +166,12 @@ ALTER TABLE `sections`
   ADD PRIMARY KEY (`section_id`);
 
 --
+-- Индексы таблицы `statistics`
+--
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `surveys`
 --
 ALTER TABLE `surveys`
@@ -162,13 +191,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `page_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `page_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `sections`
 --
 ALTER TABLE `sections`
   MODIFY `section_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `statistics`
+--
+ALTER TABLE `statistics`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `surveys`
