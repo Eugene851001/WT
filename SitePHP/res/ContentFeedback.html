@@ -1,0 +1,13 @@
+<form action="Feedback.php" method="POST" style="text-align:left;margin-left: 20%;">
+	<p>Имя</p>
+	<p><input type="text" name="name" required pattern="[A-Za-zА-Яа-яЁё]+" /></p>
+	<p>Телефон</p>
+	<p><input type="text" name="phone" pattern="\+375[0-9]{9}" /></p>
+	<p>Email</p>
+	<p><input type="text" name="mail" required /></p>
+	<p>Тема</p>
+	<p><input type="text" name="subject" required /></p>
+	<p><textarea name="messageText" style="max-width:80%" 
+		cols = "80" rows = "10" required></textarea></p>
+	<input type="submit" value="Отправить"/>
+</form>

@@ -34,3 +34,8 @@
 			Карта сайта
 		</a>
 	</p>
+	<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'Feedback.php' ? 'active' : '';?>>
+		<a href = "Feedback.php">
+			Обратная связь
+		</a>
+	</p>
