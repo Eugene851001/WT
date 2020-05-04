@@ -3,12 +3,10 @@
 error_reporting(0);
 
 require_once('LoadRegularPage.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '\vendor\autoload.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-require_once('../PHPMailer/src/PHPMailer.php');
-require_once('../PHPMailer/src/SMTP.php');
-require_once('../PHPMailer/src/Exception.php');
 require_once('MailCredits.php');
 getPageInfo("page_title='Feedback'", $title, $header, $content, $aside);
 
