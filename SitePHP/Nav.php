@@ -39,3 +39,8 @@
 			Обратная связь
 		</a>
 	</p>
+		<p class=<?php echo basename($_SERVER['SCRIPT_NAME']) === 'Statistics.php' ? 'active' : '';?>>
+		<a href = "Statistics.php">
+			Статистика сайта
+		</a>
+	</p>
